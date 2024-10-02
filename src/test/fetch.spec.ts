@@ -1,8 +1,18 @@
-import { fetchPromise } from "../app/sum";
+test('mock implementation of a basic function', () => {
+    const mock = jest.fn(x => 42 + x);
+    expect(mock(1)).toBe(43);
+    expect(mock).toHaveBeenCalledWith(1);
+})
 
-describe("fetch async test suite", () => {
-    test('the data is peanut butter', async() => {
-        const data = await fetchPromise();
-        expect(data).toBe('peanut butter');
-    })
-});
+test('spying on a meethod of an object', () => {
+    const video = {
+        play(){
+            return true
+        },
+    };
+    const spy = jest.spyOn(video, 'play');
+    video.play();
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+})
