@@ -1,12 +1,9 @@
-import { fetchData } from "../app/sum";
+import { fetchPromise } from "../app/sum";
 
-describe("fetch data async", () => {
-    test("the data is peanut butter", (done) => {
-        function callback(data) {
-            expect(data).toBe("peanut butter");
-            done();
-        }
-
-        fetchData(callback);
-    });
+test('the data is peanut butter', () => {
+    return expect(fetchPromise()).resolves.toBe('peanut butter');
 });
+
+test('the fetch fails with an error', () => {
+    return expect(fetchPromise()).rejects.toThrow('error');
+})
